@@ -7,8 +7,11 @@ import { notFound, notFoundMiddleware } from './app/middlewares/notFound';
 import router from './app/routes';
 import main from './app/utils/db';
 import sendResponse from './app/utils/sendResponse';
+import type { JwtVariables } from 'hono/jwt';
 
-const app = new Hono().basePath('/');
+type Variables = JwtVariables;
+
+const app = new Hono<{ Variables: Variables }>().basePath('/');
 
 // pretty JSON middleware
 app.use('*', prettyJSON());
